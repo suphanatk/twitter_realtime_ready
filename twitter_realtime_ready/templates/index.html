@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time X Posts</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>📡 Real-Time Posts Monitor</h1>
+    <ul id="posts"></ul>
+
+    <script>
+        const socket = io();
+        const posts = document.getElementById("posts");
+
+        socket.on("new_post", function(data) {
+            const item = document.createElement("li");
+            item.textContent = `@${data.username}: ${data.text}`;
+            posts.prepend(item);
+        });
+    </script>
+</body>
+</html>
